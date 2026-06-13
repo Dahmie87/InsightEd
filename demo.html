@@ -1,0 +1,1584 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindBridge — Early Learning Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────── */
+:root {
+  --bg:        #FAF7F4;
+  --surface:   #F3EDE5;
+  --surface2:  #EDE4D8;
+  --border:    rgba(28,20,14,0.10);
+  --orange:    #D97235;
+  --orange-lt: #F0A872;
+  --orange-bg: #FDF3EB;
+  --ink:       #1C1917;
+  --ink-mid:   #57483C;
+  --ink-lt:    #9C8878;
+  --white:     #FFFFFF;
+  --green:     #4D9B6F;
+  --amber:     #C9841A;
+  --red:       #C94E35;
+  --shadow:    0 1px 3px rgba(28,20,14,0.06), 0 4px 16px rgba(28,20,14,0.08);
+  --shadow-lg: 0 8px 40px rgba(28,20,14,0.14);
+  --r:         14px;
+  --r-sm:      9px;
+}
+
+/* ─────────────────────────────────────────
+   RESET
+───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(250,247,244,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 clamp(16px, 4vw, 48px);
+  height: 60px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.nav-logo-mark {
+  width: 34px; height: 34px;
+  background: var(--orange);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+}
+
+.nav-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-link {
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-lt);
+  cursor: pointer;
+  transition: all 0.18s;
+  border: none;
+  background: none;
+  white-space: nowrap;
+}
+
+.nav-link:hover { color: var(--ink); background: var(--surface); }
+.nav-link.active { color: var(--orange); background: var(--orange-bg); }
+
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px; height: 18px;
+  background: var(--red);
+  color: var(--white);
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0 5px;
+  margin-left: 5px;
+}
+
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--green);
+  background: rgba(77,155,111,0.1);
+  border-radius: 20px;
+  padding: 5px 12px;
+  margin-left: 12px;
+  white-space: nowrap;
+}
+
+.nav-dot {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: breathe 2.2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(0.7); }
+}
+
+/* hamburger */
+.nav-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+}
+.nav-menu-btn span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* ─────────────────────────────────────────
+   PAGE LAYOUT
+───────────────────────────────────────── */
+.page { display: none; }
+.page.active { display: block; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(16px,4vw,48px);
+}
+
+/* ─────────────────────────────────────────
+   ── PAGE: DIAGNOSE (home) ──
+───────────────────────────────────────── */
+
+/* Hero */
+.diagnose-hero {
+  padding: clamp(48px,8vw,88px) 0 clamp(40px,6vw,64px);
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--orange);
+  border-radius: 1px;
+}
+
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(36px, 6vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -1px;
+  color: var(--ink);
+  margin-bottom: 24px;
+  max-width: 700px;
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.hero-sub {
+  font-size: clamp(15px,2vw,18px);
+  color: var(--ink-mid);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+}
+.btn-primary:hover { background: #C4662E; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(217,114,53,0.35); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-mid);
+  border: 1.5px solid var(--border);
+}
+.btn-ghost:hover { background: var(--surface); color: var(--ink); }
+
+.btn-sm { padding: 9px 18px; font-size: 13px; border-radius: 8px; }
+
+/* ── Children strip ── */
+.children-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-lt);
+  margin-bottom: 14px;
+}
+
+.children-strip {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.child-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 10px 10px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.child-chip:hover { border-color: var(--orange); box-shadow: var(--shadow); }
+.child-chip.selected { border-color: var(--orange); background: var(--orange-bg); }
+
+.child-chip-av {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.child-chip-info { line-height: 1; }
+.child-chip-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.child-chip-risk { font-size: 11px; color: var(--ink-lt); margin-top: 2px; }
+
+.risk-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+/* ── Diagnostic panel ── */
+.diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(14px,2vw,24px);
+  margin-bottom: clamp(24px,4vw,48px);
+}
+
+/* Arc gauge */
+.arc-card {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: clamp(24px,3vw,40px);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.arc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(217,114,53,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.arc-wrap {
+  position: relative;
+  width: clamp(160px,24vw,220px);
+  height: clamp(80px,12vw,110px);
+  margin-bottom: 20px;
+}
+
+.arc-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.arc-label-wrap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  text-align: center;
+}
+
+.arc-pct {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px,5vw,44px);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.arc-sublabel {
+  font-size: 12px;
+  color: var(--ink-lt);
+  margin-top: 6px;
+}
+
+.arc-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(15px,2vw,19px);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.arc-card-sub {
+  font-size: 13px;
+  color: var(--ink-mid);
+  text-align: center;
+  line-height: 1.6;
+  max-width: 260px;
+}
+
+/* Signal card */
+.signal-card {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: clamp(20px,2.5vw,32px);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.sc-meta {
+  font-size: 12px;
+  color: var(--ink-lt);
+  margin-bottom: 22px;
+}
+
+.signal-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.signal-row:last-child { border-bottom: none; }
+
+.signal-name {
+  font-size: 13px;
+  color: var(--ink-mid);
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.signal-track {
+  flex: 1;
+  height: 6px;
+  background: var(--surface);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.signal-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1.4s cubic-bezier(.22,.68,0,1.2);
+}
+
+.signal-val {
+  font-size: 13px;
+  font-weight: 600;
+  width: 44px;
+  text-align: right;
+}
+
+/* ── Alert box ── */
+.alert-card {
+  background: var(--white);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: clamp(16px,2.5vw,28px);
+}
+
+.alert-card-stripe {
+  height: 4px;
+  background: var(--red);
+}
+.alert-card-stripe.amber { background: var(--amber); }
+.alert-card-stripe.green { background: var(--green); }
+
+.alert-card-body {
+  padding: clamp(20px,2.5vw,32px);
+}
+
+.alert-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.alert-eyebrow.amber { color: var(--amber); }
+.alert-eyebrow.green { color: var(--green); }
+
+.alert-message {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(16px,2.5vw,21px);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.alert-detail {
+  font-size: 14px;
+  color: var(--ink-mid);
+  line-height: 1.7;
+}
+
+.alert-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--surface);
+  color: var(--ink-mid);
+}
+
+.tag.orange { background: var(--orange-bg); color: var(--orange); }
+.tag.red { background: rgba(201,78,53,0.1); color: var(--red); }
+.tag.green { background: rgba(77,155,111,0.1); color: var(--green); }
+.tag.amber { background: rgba(201,132,26,0.1); color: var(--amber); }
+
+/* ─────────────────────────────────────────
+   ── PAGE: LEARN (child exercises) ──
+───────────────────────────────────────── */
+.learn-hero {
+  background: var(--ink);
+  color: var(--white);
+  padding: clamp(40px,6vw,72px) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.learn-hero::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(217,114,53,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.learn-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(16px,4vw,48px);
+}
+
+.learn-greeting {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--orange-lt);
+  margin-bottom: 12px;
+}
+
+.learn-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px,6vw,58px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.learn-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 300;
+  margin-bottom: 28px;
+}
+
+.learn-stats {
+  display: flex;
+  gap: clamp(16px,3vw,32px);
+  flex-wrap: wrap;
+}
+
+.learn-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.learn-stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.learn-stat-lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* Exercise cards */
+.ex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(200px,28vw,260px), 1fr));
+  gap: clamp(12px,2vw,20px);
+  padding: clamp(28px,4vw,48px) 0;
+}
+
+.ex-card {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: clamp(20px,2.5vw,32px);
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  transition: all 0.22s;
+  position: relative;
+  overflow: hidden;
+}
+
+.ex-card:hover:not(.locked) {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(217,114,53,0.12), var(--shadow);
+  transform: translateY(-2px);
+}
+
+.ex-card.locked { opacity: 0.48; cursor: not-allowed; }
+
+.ex-icon {
+  width: 52px; height: 52px;
+  background: var(--orange-bg);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin-bottom: 16px;
+}
+
+.ex-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.ex-desc {
+  font-size: 13px;
+  color: var(--ink-lt);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.ex-bar-bg {
+  height: 3px;
+  background: var(--surface);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ex-bar-fill {
+  height: 100%;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+.ex-tag {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--orange-bg);
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+
+/* ── Live signal bar (demo strip) ── */
+.signal-strip {
+  background: var(--ink);
+  border-radius: var(--r);
+  padding: clamp(16px,2.5vw,28px);
+  display: flex;
+  gap: clamp(12px,2vw,24px);
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 0 clamp(24px,4vw,48px);
+}
+
+.ss-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ss-val {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px,3vw,30px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+}
+
+.ss-lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.38);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.ss-sep {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+.ss-wave {
+  flex: 1;
+  min-width: 100px;
+}
+
+/* ─────────────────────────────────────────
+   ── PAGE: SCIENCE ──
+───────────────────────────────────────── */
+.science-hero {
+  padding: clamp(52px,8vw,96px) 0 clamp(40px,6vw,64px);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: clamp(40px,6vw,64px);
+}
+
+.science-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px,6vw,60px);
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+  color: var(--ink);
+  max-width: 640px;
+  margin-bottom: 20px;
+}
+
+.science-h1 em { font-style: italic; color: var(--orange); }
+
+.science-sub {
+  font-size: 16px;
+  color: var(--ink-mid);
+  line-height: 1.7;
+  max-width: 500px;
+  font-weight: 300;
+}
+
+.conditions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(260px,30vw,340px), 1fr));
+  gap: clamp(14px,2vw,24px);
+  margin-bottom: clamp(40px,6vw,64px);
+}
+
+.cond-card {
+  background: var(--white);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.cond-card-top {
+  padding: clamp(20px,2.5vw,28px);
+  border-bottom: 1px solid var(--border);
+}
+
+.cond-icon {
+  width: 44px; height: 44px;
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+
+.cond-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.cond-desc {
+  font-size: 13px;
+  color: var(--ink-mid);
+  line-height: 1.65;
+}
+
+.cond-signals {
+  padding: clamp(16px,2vw,24px);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cond-signal-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-lt);
+  margin-bottom: 12px;
+}
+
+.cond-signal-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--ink-mid);
+  line-height: 1.5;
+}
+
+.cond-signal-item:last-child { border-bottom: none; }
+
+.cond-bullet {
+  width: 5px; height: 5px;
+  background: var(--orange);
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+/* Pipeline */
+.pipeline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: clamp(40px,6vw,64px);
+  flex-wrap: wrap;
+}
+
+.pipe-step {
+  flex: 1;
+  min-width: 160px;
+  padding: clamp(20px,2.5vw,28px);
+  background: var(--white);
+  border-radius: 0;
+  position: relative;
+  border-right: 1px solid var(--border);
+}
+
+.pipe-step:first-child { border-radius: var(--r) 0 0 var(--r); }
+.pipe-step:last-child { border-radius: 0 var(--r) var(--r) 0; border-right: none; }
+
+.pipe-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--surface2);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.pipe-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.pipe-desc {
+  font-size: 12px;
+  color: var(--ink-lt);
+  line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────
+   GAME MODAL
+───────────────────────────────────────── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(14,10,8,0.6);
+  z-index: 500;
+  align-items: flex-end;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: clamp(8px,2vw,20px);
+}
+
+.overlay.open { display: flex; align-items: center; }
+
+.modal {
+  background: var(--bg);
+  border-radius: clamp(16px,3vw,24px);
+  width: min(680px, 100%);
+  max-height: min(680px, 90vh);
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.modal-head {
+  padding: clamp(20px,3vw,32px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+.modal-head-left {}
+
+.modal-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 4px;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px,3vw,24px);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.close-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-mid);
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+.close-btn:hover { background: var(--surface2); color: var(--ink); }
+
+.modal-body {
+  padding: clamp(20px,3vw,32px);
+}
+
+/* reading */
+.reading-text {
+  background: var(--white);
+  border-radius: var(--r-sm);
+  padding: clamp(18px,3vw,28px);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(17px,2.5vw,22px);
+  line-height: 2;
+  color: var(--ink);
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+
+.word {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px 2px;
+  transition: background 0.12s;
+}
+.word:hover { background: var(--orange-bg); }
+.word.active { background: var(--orange); color: var(--white); border-radius: 4px; }
+.word.done { color: var(--ink-lt); }
+
+/* letter tiles */
+.letter-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.letter-tile {
+  aspect-ratio: 1;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px,5vw,40px);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s;
+  color: var(--ink);
+  user-select: none;
+}
+
+.letter-tile:hover { border-color: var(--orange); background: var(--orange-bg); transform: scale(1.04); }
+.letter-tile.wrong { border-color: var(--red); background: rgba(201,78,53,0.08); animation: shake 0.35s; }
+.letter-tile.correct { border-color: var(--green); background: rgba(77,155,111,0.1); }
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* number puzzle */
+.num-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.num-block {
+  width: clamp(52px,9vw,68px);
+  height: clamp(52px,9vw,68px);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px,4vw,30px);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.num-block.blank {
+  border-style: dashed;
+  border-color: var(--orange);
+  color: var(--orange);
+  background: var(--orange-bg);
+}
+
+.num-sep { font-size: 20px; color: var(--ink-lt); }
+
+.answer-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.answer-chip {
+  padding: clamp(10px,2vw,14px) clamp(16px,3vw,24px);
+  border-radius: var(--r-sm);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px,3.5vw,26px);
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--ink);
+  transition: all 0.18s;
+}
+
+.answer-chip:hover { border-color: var(--orange); background: var(--orange-bg); }
+
+/* pattern */
+.pattern-seq {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.pshape {
+  width: clamp(48px,8vw,60px);
+  height: clamp(48px,8vw,60px);
+  border-radius: 10px;
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(24px,4vw,32px);
+}
+
+.pshape.blank {
+  background: var(--orange-bg);
+  border: 2px dashed var(--orange);
+  font-size: clamp(18px,3vw,24px);
+  color: var(--orange);
+}
+
+/* prompt box */
+.prompt-box {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--r-sm);
+  padding: 16px 20px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(16px,2.5vw,20px);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* mini stats in modal */
+.game-stats {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.gstat {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: center;
+  flex: 1;
+  min-width: 70px;
+}
+
+.gstat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.gstat-lbl { font-size: 10px; color: var(--ink-lt); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+
+.game-hint {
+  font-size: 12px;
+  color: var(--ink-lt);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+
+/* ─────────────────────────────────────────
+   TOAST
+───────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: clamp(16px,3vw,32px);
+  right: clamp(16px,3vw,32px);
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--r-sm);
+  padding: 18px 22px;
+  box-shadow: var(--shadow-lg);
+  z-index: 9999;
+  max-width: min(360px, calc(100vw - 32px));
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(.22,.68,0,1.2);
+  border-left: 3px solid var(--orange);
+}
+
+.toast.show { transform: translateY(0); opacity: 1; pointer-events: all; }
+
+.toast-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--orange-lt);
+  margin-bottom: 5px;
+}
+
+.toast-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.toast-body { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .diag-grid { grid-template-columns: 1fr; }
+  .pipeline { flex-direction: column; }
+  .pipe-step { border-right: none; border-bottom: 1px solid var(--border); border-radius: 0 !important; }
+  .pipe-step:first-child { border-radius: var(--r) var(--r) 0 0 !important; }
+  .pipe-step:last-child { border-radius: 0 0 var(--r) var(--r) !important; border-bottom: none; }
+  .nav-links { display: none; flex-direction: column; }
+  .nav-links.open { display: flex; position: fixed; top: 60px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 12px; z-index: 199; }
+  .nav-menu-btn { display: flex; }
+  .nav-status { display: none; }
+  .learn-stats { gap: 20px; }
+  .ss-sep { display: none; }
+  .conditions-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .hero-h1 { font-size: 32px; }
+  .arc-wrap { width: 140px; height: 70px; }
+  .letter-grid { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ NAV ══════════════════ -->
+<nav class="nav">
+  <a class="nav-logo" href="#" onclick="navigate('diagnose');return false;">
+    <div class="nav-logo-mark">🧠</div>
+    <span class="nav-logo-text">MindBridge</span>
+  </a>
+
+  <div class="nav-links" id="navLinks">
+    <button class="nav-link active" onclick="navigate('diagnose')">Diagnose</button>
+    <button class="nav-link" onclick="navigate('learn')">
+      Learn <span id="nav-child-name" style="color:var(--orange-lt);"></span>
+    </button>
+    <button class="nav-link" onclick="navigate('science')">Science</button>
+  </div>
+
+  <div class="nav-status" id="navStatus">
+    <div class="nav-dot"></div>
+    AI Active
+  </div>
+
+  <button class="nav-menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════
+   PAGE: DIAGNOSE
+══════════════════════════════════════ -->
+<div class="page active" id="page-diagnose">
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="diagnose-hero">
+      <div class="hero-eyebrow">AI-Powered · Early Detection · Africa</div>
+      <h1 class="hero-h1">Every child deserves to be <em>understood,</em> not labelled.</h1>
+      <p class="hero-sub">MindBridge watches how a child learns — silently, passively — and surfaces the patterns that reveal whether they need a different kind of teaching.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="navigate('diagnose')">View Active Reports</button>
+        <button class="btn btn-ghost" onclick="navigate('science')">How detection works →</button>
+      </div>
+    </div>
+
+    <!-- Child selector -->
+    <div class="children-label">Select a child to view their diagnostic profile</div>
+    <div class="children-strip" id="childStrip">
+      <div class="child-chip selected" onclick="selectChild('james',this)">
+        <div class="child-chip-av" style="background:#F5E8D8;color:#8C4010;">J</div>
+        <div class="child-chip-info">
+          <div class="child-chip-name">James M.</div>
+          <div class="child-chip-risk">Dyslexia · 84%</div>
+        </div>
+        <div class="risk-dot" style="background:var(--red);"></div>
+      </div>
+      <div class="child-chip" onclick="selectChild('amara',this)">
+        <div class="child-chip-av" style="background:#E8F2EC;color:#2A6B45;">A</div>
+        <div class="child-chip-info">
+          <div class="child-chip-name">Amara K.</div>
+          <div class="child-chip-risk">Monitoring · 44%</div>
+        </div>
+        <div class="risk-dot" style="background:var(--amber);"></div>
+      </div>
+      <div class="child-chip" onclick="selectChild('chidi',this)">
+        <div class="child-chip-av" style="background:#EDE8F5;color:#5A3A91;">C</div>
+        <div class="child-chip-info">
+          <div class="child-chip-name">Chidi O.</div>
+          <div class="child-chip-risk">Typical · 28%</div>
+        </div>
+        <div class="risk-dot" style="background:var(--green);"></div>
+      </div>
+      <div class="child-chip" onclick="selectChild('fatima',this)">
+        <div class="child-chip-av" style="background:#FAE8E0;color:#8C3A1C;">F</div>
+        <div class="child-chip-info">
+          <div class="child-chip-name">Fatima B.</div>
+          <div class="child-chip-risk">Dyscalculia · 61%</div>
+        </div>
+        <div class="risk-dot" style="background:var(--amber);"></div>
+      </div>
+    </div>
+
+    <!-- Diagnostic panel -->
+    <div class="diag-grid">
+      <!-- Arc gauge -->
+      <div class="arc-card" id="arcCard">
+        <div class="arc-wrap">
+          <svg class="arc-svg" viewBox="0 0 220 110">
+            <!-- Track -->
+            <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#F0EBE3" stroke-width="14" stroke-linecap="round"/>
+            <!-- Fill - will be set by JS -->
+            <path id="arcFill" d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#D97235" stroke-width="14" stroke-linecap="round"
+              stroke-dasharray="283" stroke-dashoffset="283" style="transition:stroke-dashoffset 1.4s cubic-bezier(.22,.68,0,1.2);"/>
+          </svg>
+          <div class="arc-label-wrap">
+            <div class="arc-pct" id="arcPct">84%</div>
+          </div>
+        </div>
+        <div class="arc-card-title" id="arcTitle">Dyslexia Detection</div>
+        <div class="arc-sublabel" id="arcSub">14 sessions · 340 signals analysed</div>
+        <div style="height:16px;"></div>
+        <div class="arc-card-sub" id="arcDesc">Pattern confidence has crossed the alert threshold. James shows consistent markers across phonics, letter recognition, and reading fluency tasks.</div>
+      </div>
+
+      <!-- Signal card -->
+      <div class="signal-card">
+        <div class="sc-title" id="signalTitle">Detected Signals — James M.</div>
+        <div class="sc-meta" id="signalMeta">Measured across 14 learning sessions</div>
+        <div id="signalRows"></div>
+      </div>
+    </div>
+
+    <!-- Alert / teacher recommendation -->
+    <div class="alert-card" id="alertCard">
+      <div class="alert-card-stripe" id="alertStripe"></div>
+      <div class="alert-card-body">
+        <div class="alert-eyebrow" id="alertEyebrow">⚠ High Confidence · Flagged for Teacher Review</div>
+        <div class="alert-message" id="alertMsg">James struggles with phonics and letter sequencing — this is not a learning deficiency, it is a processing difference that responds well to the right approach.</div>
+        <div class="alert-detail" id="alertDetail">Consistent reversal of b/d and p/q observed across 14 sessions. Phonics hesitation averaging 4.2 seconds — nearly 3× the class baseline. Recommend oral-first instruction, extended reading time, and multisensory letter tracing. MindBridge has already begun adapting James's exercises to match his learning profile.</div>
+        <div class="alert-tags" id="alertTags"></div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div style="padding: clamp(20px,4vw,48px) 0; display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between; border-top:1px solid var(--border);">
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,20px);font-weight:600;color:var(--ink);margin-bottom:4px;">Start a learning session with James</div>
+        <div style="font-size:13px;color:var(--ink-lt);">The exercises feel like games. The diagnosis happens in the background.</div>
+      </div>
+      <button class="btn btn-primary" onclick="goToLearn()">Open Learning Mode →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+   PAGE: LEARN
+══════════════════════════════════════ -->
+<div class="page" id="page-learn">
+  <div class="learn-hero">
+    <div class="learn-hero-inner">
+      <div class="learn-greeting" id="learnGreeting">Good morning, Class 3B</div>
+      <h2 class="learn-name" id="learnName">Hello, James 👋</h2>
+      <p class="learn-sub">Choose an activity. Take your time. You're doing brilliantly.</p>
+      <div class="learn-stats">
+        <div class="learn-stat">
+          <span class="learn-stat-val" id="ls-sessions">14</span>
+          <span class="learn-stat-lbl">Sessions</span>
+        </div>
+        <div class="learn-stat">
+          <span class="learn-stat-val" id="ls-stars">⭐ 32</span>
+          <span class="learn-stat-lbl">Stars</span>
+        </div>
+        <div class="learn-stat">
+          <span class="learn-stat-val" id="ls-streak">🔥 5</span>
+          <span class="learn-stat-lbl">Day Streak</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="ex-grid">
+      <div class="ex-card" onclick="openGame('reading')">
+        <div class="ex-tag">Active</div>
+        <div class="ex-icon">📖</div>
+        <div class="ex-name">Story Reading</div>
+        <div class="ex-desc">Read along at your own pace. Tap any word you find difficult.</div>
+        <div class="ex-bar-bg"><div class="ex-bar-fill" style="width:65%"></div></div>
+      </div>
+      <div class="ex-card" onclick="openGame('letters')">
+        <div class="ex-icon">🔤</div>
+        <div class="ex-name">Letter Match</div>
+        <div class="ex-desc">Find the matching letter or sound. Quick and fun.</div>
+        <div class="ex-bar-bg"><div class="ex-bar-fill" style="width:40%"></div></div>
+      </div>
+      <div class="ex-card" onclick="openGame('numbers')">
+        <div class="ex-icon">🔢</div>
+        <div class="ex-name">Number Puzzles</div>
+        <div class="ex-desc">Fill in the missing number. What comes next?</div>
+        <div class="ex-bar-bg"><div class="ex-bar-fill" style="width:20%"></div></div>
+      </div>
+      <div class="ex-card" onclick="openGame('patterns')">
+        <div class="ex-icon">🎨</div>
+        <div class="ex-name">Pattern Play</div>
+        <div class="ex-desc">Colours and shapes in a sequence. Complete the pattern.</div>
+        <div class="ex-bar-bg"><div class="ex-bar-fill" style="width:50%"></div></div>
+      </div>
+      <div class="ex-card locked">
+        <div class="ex-icon">🎵</div>
+        <div class="ex-name">Sound Blends</div>
+        <div class="ex-desc">Combine sounds into words. Unlock at 50 stars.</div>
+        <div class="ex-bar-bg"><div class="ex-bar-fill" style="width:0%"></div></div>
+      </div>
+      <div class="ex-card locked">
+        <div class="ex-icon">🌍</div>
+        <div class="ex-name">Word Safari</div>
+        <div class="ex-desc">Words from your world. Unlock at 60 stars.</div>
+        <div class="ex-bar-bg"><div class="ex-bar-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- Live signal strip -->
+    <div class="signal-strip">
+      <div class="ss-item">
+        <div class="ss-val" id="ss-hesit">3.8s</div>
+        <div class="ss-lbl">Avg Hesitation</div>
+      </div>
+      <div class="ss-sep"></div>
+      <div class="ss-item">
+        <div class="ss-val" id="ss-rev" style="color:#F0A872;">7</div>
+        <div class="ss-lbl">Reversals</div>
+      </div>
+      <div class="ss-sep"></div>
+      <div class="ss-item">
+        <div class="ss-val" id="ss-rr">4</div>
+        <div class="ss-lbl">Re-reads</div>
+      </div>
+      <div class="ss-sep"></div>
+      <div class="ss-item">
+        <div class="ss-val" id="ss-conf" style="color:var(--orange-lt);">84%</div>
+        <div class="ss-lbl">Confidence</div>
+      </div>
+      <canvas class="ss-wave" id="waveCanvas" height="48"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+   PAGE: SCIENCE
+══════════════════════════════════════ -->
+<div class="page" id="page-science">
+  <div class="container">
+    <div class="science-hero">
+      <h1 class="science-h1">Learning differences leave a <em>digital fingerprint.</em></h1>
+      <p class="science-sub">MindBridge reads that fingerprint — not through clinical tests, but through the natural patterns a child leaves when they simply use the app.</p>
+    </div>
+
+    <!-- Pipeline -->
+    <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink-lt);margin-bottom:14px;">How It Works</div>
+    <div class="pipeline" style="box-shadow:var(--shadow);margin-bottom:clamp(40px,6vw,64px);">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div class="pipe-title">Child learns normally</div>
+        <div class="pipe-desc">Stories, letter games, number puzzles. Nothing about the experience feels like a test.</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div class="pipe-title">Signals are logged</div>
+        <div class="pipe-desc">Every tap, hesitation, skip, error, and re-read is timestamped in the background.</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div class="pipe-title">Patterns emerge</div>
+        <div class="pipe-desc">The AI compares the child's behavioral fingerprint against known learning profiles.</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">04</div>
+        <div class="pipe-title">App adapts silently</div>
+        <div class="pipe-desc">Pacing, format, and exercise type shift automatically for that specific child's brain.</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">05</div>
+        <div class="pipe-title">Teacher is alerted</div>
+        <div class="pipe-desc">Plain language. No clinical jargon. Exactly what to do differently — and why.</div>
+      </div>
+    </div>
+
+    <!-- Conditions -->
+    <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink-lt);margin-bottom:14px;">The Three Conditions We Screen For</div>
+    <div class="conditions-grid">
+      <div class="cond-card">
+        <div class="cond-card-top">
+          <div class="cond-icon" style="background:#FDECEA;">📚</div>
+          <div class="cond-name">Dyslexia</div>
+          <div class="cond-desc">A phonological processing difference affecting 5–17% of children. The brain routes visual symbols differently — making decoding text effortful. Not a sign of low intelligence. Often the most intelligent children in the room.</div>
+        </div>
+        <div class="cond-signals">
+          <div class="cond-signal-title">Signals MindBridge Tracks</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Letter reversal frequency (b/d, p/q, u/n)</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Phonics hesitation vs. peer baseline</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Re-read rate on same text passage</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Word-skip and line-skip patterns</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Oral vs. written comprehension divergence</div>
+        </div>
+      </div>
+      <div class="cond-card">
+        <div class="cond-card-top">
+          <div class="cond-icon" style="background:#F3EDFA;">⚡</div>
+          <div class="cond-name">ADHD</div>
+          <div class="cond-desc">Affects executive function, impulse control, and sustained attention. Children are not naughty — their brain's attention circuitry is wired differently. Often mislabelled as laziness or behaviour problems.</div>
+        </div>
+        <div class="cond-signals">
+          <div class="cond-signal-title">Signals MindBridge Tracks</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Attention drop-off curves over time</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Impulsive selection (sub-1s on complex tasks)</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>High abandon rates mid-exercise</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Inconsistent performance across sessions</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Performance spikes on novel/stimulating content</div>
+        </div>
+      </div>
+      <div class="cond-card">
+        <div class="cond-card-top">
+          <div class="cond-icon" style="background:var(--orange-bg);">🔢</div>
+          <div class="cond-name">Dyscalculia</div>
+          <div class="cond-desc">A specific difficulty with numbers and mathematical concepts. Affects ~5% of children and is the most under-detected of the three conditions — especially in Africa, where maths failure is simply accepted.</div>
+        </div>
+        <div class="cond-signals">
+          <div class="cond-signal-title">Signals MindBridge Tracks</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Digit reversal and transposition errors</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Number magnitude comparison failures</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Counting sequence irregularities</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Spatial errors in written arithmetic layout</div>
+          <div class="cond-signal-item"><div class="cond-bullet"></div>Strong verbal vs. weak symbolic math gap</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ethics note -->
+    <div style="background:var(--ink);border-radius:var(--r);padding:clamp(24px,3.5vw,40px);margin-bottom:clamp(40px,6vw,64px);">
+      <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:16px;">Ethics & Safeguards</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px;">
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">This is a screening tool, not a diagnosis</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">MindBridge flags children for teacher attention. It does not replace clinical assessment — it makes clinical referral possible where it was previously unimaginable.</div>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">No label until 60% confidence</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">Below this threshold, patterns are quietly logged but no flag is raised to the teacher. The system monitors, not judges.</div>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">Data stays on the device</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">All pattern analysis runs locally. No child's behavioral data is transmitted without explicit school consent.</div>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px;">Trained on African contexts</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">Models calibrated to African language phonology, Swahili and Hausa letter patterns, and local classroom pacing norms.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ GAME MODAL ══════════════════ -->
+<div class="overlay" id="overlay" onclick="checkOverlayClose(event)">
+  <div class="modal" id="modal">
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <div class="modal-eyebrow" id="modal-eyebrow">Learning Exercise</div>
+        <div class="modal-title" id="modal-title">Story Reading</div>
+      </div>
+      <button class="close-btn" onclick="closeGame()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ══════════════════ TOAST ══════════════════ -->
+<div class="toast" id="toast">
+  <div class="toast-label" id="toast-label">AI Signal Detected</div>
+  <div class="toast-title" id="toast-title"></div>
+  <div class="toast-body" id="toast-body"></div>
+</div>
+</body>
+</html>
