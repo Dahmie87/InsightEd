@@ -3,6 +3,7 @@ import { Gauge } from '../components/Gauge'
 import { useAppContext } from '../appContext'
 import { childOrder } from '../data'
 import type { ChildId } from '../types'
+import heroImage from '../assets/hero.png'
 
 const heroWords = ['understood', 'seen', 'supported', 'guided']
 
@@ -13,17 +14,15 @@ export function DashboardPage() {
   return (
     <div className="space-y-6 lg:space-y-8">
       <section className="rounded-[2rem] border border-[color:var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.94)_0%,rgba(255,247,234,0.96)_58%,rgba(255,244,226,0.92)_100%)] p-5 shadow-[var(--shadow)] sm:p-7 lg:p-8">
-        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(320px,0.98fr)] xl:items-center">
-          <div className="max-w-[40rem] space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[color:rgba(239,125,47,0.18)] bg-[color:var(--orange-bg)] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--color-orange)]">
-              AI-powered early detection · Africa
-            </div>
+        <div className="flex flex-col gap-8 lg:flex-row lg:flex-nowrap lg:items-stretch lg:gap-6">
+          <div className="w-full space-y-4 lg:w-[42%] lg:flex-none">
+           
             <h1 className="max-w-[16ch] font-display text-3xl font-semibold leading-[1.04] tracking-tight text-[color:var(--ink)] sm:text-4xl lg:text-5xl">
               Every child deserves to be <TypingHeroWord />,
               {' '}
               not labelled.
             </h1>
-            <p className="max-w-2xl text-sm leading-7 text-[color:var(--ink-mid)] sm:text-base">
+            <p className="max-w-[34rem] text-sm leading-7 text-[color:var(--ink-mid)] sm:text-base">
               InsightED watches how a child learns, then turns the patterns into gentle, useful guidance. The child sees games. The teacher sees next steps.
             </p>
             <div className="flex flex-wrap gap-3 pt-1">
@@ -44,48 +43,13 @@ export function DashboardPage() {
             </div>
           </div>
 
-          <div className="relative min-h-[260px] overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(255,242,223,0.96)_100%)] p-5 shadow-[var(--shadow)] sm:min-h-[320px] sm:p-6">
-            <div className="absolute right-[-2rem] top-[-2rem] h-40 w-40 rounded-full bg-[rgba(239,125,47,0.18)] blur-3xl" />
-            <div className="absolute left-[-1.5rem] bottom-[-1.5rem] h-32 w-32 rounded-full bg-[rgba(57,164,106,0.10)] blur-3xl" />
-
-            <div className="relative flex h-full flex-col justify-between gap-4">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--ink-soft)]">Hero preview</div>
-                  <div className="mt-1 text-sm text-[color:var(--ink-mid)]">A visual space for the child-centered experience.</div>
-                </div>
-                <div className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--color-orange)] shadow-sm">
-                  Live view
-                </div>
-              </div>
-
-              <div className="grid flex-1 place-items-center rounded-[1.5rem] border border-dashed border-[color:rgba(239,125,47,0.2)] bg-white/55 p-4">
-                <div className="w-full max-w-[250px] space-y-4">
-                  <div className="rounded-[1.4rem] bg-[linear-gradient(135deg,#fff7ec_0%,#ffe7c7_100%)] p-4 shadow-sm">
-                    <div className="flex items-center justify-between">
-                      <div className="text-sm font-semibold text-[color:var(--ink)]">Reading path</div>
-                      <div className="rounded-full bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[color:var(--color-green)]">calm</div>
-                    </div>
-                    <div className="mt-3 flex items-end gap-2">
-                      <span className="h-10 w-10 rounded-full bg-[rgba(239,125,47,0.9)]" />
-                      <span className="h-14 w-14 rounded-full bg-[rgba(57,164,106,0.85)]" />
-                      <span className="h-8 w-8 rounded-full bg-[rgba(217,154,31,0.9)]" />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="rounded-[1.1rem] bg-white px-3 py-3 shadow-sm">
-                      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--ink-soft)]">Focus</div>
-                      <div className="mt-1 text-lg font-bold text-[color:var(--ink)]">Play</div>
-                    </div>
-                    <div className="rounded-[1.1rem] bg-white px-3 py-3 shadow-sm">
-                      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--ink-soft)]">Signal</div>
-                      <div className="mt-1 text-lg font-bold text-[color:var(--ink)]">Seen</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="relative min-h-[13rem] overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(255,242,223,0.96)_100%)] shadow-[var(--shadow)] lg:min-h-[20rem] lg:flex-1 lg:min-w-0">
+            <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,transparent_100%)]" />
+            <img
+              src={heroImage}
+              alt="InsightED hero illustration"
+              className="h-full w-full object-cover object-center"
+            />
           </div>
         </div>
 
