@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-	--font-sans: 'DM Sans', sans-serif;
+	--font-sans: 'Nunito', 'DM Sans', sans-serif;
 	--font-display: 'Nunito', 'DM Sans', sans-serif;
 }
 
@@ -33,7 +33,7 @@ html {
 body {
 	margin: 0;
 	min-height: 100vh;
-	font-family: 'DM Sans', sans-serif;
+	font-family: 'Nunito', 'DM Sans', sans-serif;
 	background:
 		radial-gradient(circle at top left, rgba(239, 125, 47, 0.16) 0%, transparent 26%),
 		radial-gradient(circle at top right, rgba(57, 164, 106, 0.09) 0%, transparent 22%),
