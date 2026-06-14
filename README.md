@@ -1,73 +1,89 @@
-# React + TypeScript + Vite
+# InsightED — Early Learning Intelligence Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## The Problem
 
-Currently, two official plugins are available:
+Early learning differences (dyslexia, ADHD, dyscalculia) go undetected in African classrooms because:
+- Clinical screening is expensive and unavailable.
+- Teachers lack tools to recognize non-obvious patterns.
+- By the time a child struggles visibly, years of frustration have accumulated.
+- Labeling happens without understanding; support never comes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Result**: Millions of children are written off as "slow" or "naughty" when they simply think differently.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How It Works
 
-## Expanding the ESLint configuration
+InsightED inverts the diagnosis model: **instead of testing a child, it watches how they naturally learn**.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### The Three Phases
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**1. Child Plays Games (Learn Page)**
+- Story reading exercises (tap each word as you read).
+- Letter matching puzzles (find the sound, dodge b/d confusion).
+- Number sequences (fill the missing value).
+- Pattern recognition (complete the shape sequence).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+The child sees only fun activities. They feel like games.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**2. Signals Are Logged Silently (Backgound)**
+On every interaction, the system records:
+- **Hesitation time** (how long before tapping/answering).
+- **Error type** (reversals, skips, magnitude confusion).
+- **Consistency** (does the same error repeat across sessions?).
+- **Response patterns** (is the child impulsive or cautious?).
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+No judgment. No red flag. Just data.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**3. Patterns Are Extracted (Diagnose Page)**
+After 8–14 sessions, behavioral fingerprints emerge:
+- **Dyslexia**: letter reversals, phonics hesitation, re-read spikes.
+- **ADHD**: attention drop-off, impulsive selection, high abandonment.
+- **Dyscalculia**: digit reversals, magnitude errors, verbal-vs-symbolic gaps.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+When confidence crosses 60%, the teacher sees a structured alert with:
+- What the pattern means (not clinical jargon).
+- Exactly what to do differently (oral-first instruction, extended time, visual aids).
+- Why it's not a deficiency (it's a processing difference).
+
+---
+
+## Why It Works
+
+1. **Natural Observation**: No test anxiety. The child is simply playing.
+2. **Scale**: One app can serve 100+ children with no clinical infrastructure.
+3. **Early Intervention**: Patterns surface before failure becomes ingrained.
+4. **Teacher Empowerment**: Plain-language alerts that are actionable, not alarming.
+5. **Equity**: Reaches rural and under-resourced schools where clinical screening is impossible.
+
+---
+
+## What Can Be Improved
+
+### Immediate Priorities
+- **Calibration**: Current thresholds (60% confidence, reversal frequency) are demo values. They need to be tuned against real data from African classrooms.
+- **Signal Richness**: Add eye-tracking, audio hesitation detection, and keystroke timing for finer pattern granularity.
+- **Contextual Adaptation**: The app should adjust difficulty in real-time based on live signals, not just log them.
+- **Teacher Feedback Loop**: Teachers should be able to validate or override flags ("This wasn't what I saw in class"), so the model improves.
+
+### Medium-Term
+- **Multi-language Support**: Extend beyond English to Swahili, Hausa, Yoruba (phoneme inventory differs; patterns shift).
+- **Parent Portal**: Real-time updates for caregivers (not diagnoses, but progress and recommendations).
+- **Offline Resilience**: Full local analysis with optional cloud sync for aggregated research (privacy-preserving).
+- **Intervention Playbook**: Link each flag to micro-interventions (video demos, daily exercises, scaffolded reading lists).
+
+### Long-Term Vision
+- **Longitudinal Tracking**: Watch how a child's patterns evolve with intervention; measure what actually works.
+- **Mild-to-Moderate Spectrum**: Move beyond three conditions to capture the full spectrum (processing speed, working memory, executive function).
+- **Peer Benchmarking**: Silent comparison against cohort norms to flag outliers (without shaming).
+- **Cross-Cultural Validation**: Ensure patterns hold across languages, scripts, and educational systems.
+
+---
+
+## The Core Insight
+
+**A learning difference is not a deficiency—it's a *different processing path*.**
+
+InsightED's job is not to label. It's to **surface the hidden patterns that reveal what kind of teaching will actually work for this child's brain**.
+
+When that happens early, before shame sets in, everything changes.
