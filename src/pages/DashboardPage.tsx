@@ -19,7 +19,7 @@ export function DashboardPage() {
               Every child deserves to be <span className="text-[color:var(--color-orange)]">understood</span>, not labelled.
             </h1>
             <p className="max-w-2xl text-sm leading-7 text-[color:var(--ink-mid)] sm:text-base">
-              MindBridge watches how a child learns, then turns the patterns into gentle, useful guidance. The child sees games. The teacher sees next steps.
+              InsightED watches how a child learns, then turns the patterns into gentle, useful guidance. The child sees games. The teacher sees next steps.
             </p>
           </div>
 

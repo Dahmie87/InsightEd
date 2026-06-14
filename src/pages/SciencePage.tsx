@@ -9,7 +9,7 @@ export function SciencePage() {
           Learning differences leave a <span className="italic text-[color:var(--color-orange)]">digital fingerprint.</span>
         </h1>
         <p className="max-w-2xl text-base leading-7 text-[color:var(--ink-mid)] sm:text-lg">
-          MindBridge reads that fingerprint through ordinary learning behavior, not through clinical tests. The result is a screen that feels like play for the child and actionable guidance for the teacher.
+          InsightED reads that fingerprint through ordinary learning behavior, not through clinical tests. The result is a screen that feels like play for the child and actionable guidance for the teacher.
         </p>
       </section>
 

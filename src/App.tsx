@@ -9,7 +9,8 @@ import { SciencePage } from './pages/SciencePage'
 import type { AppContextValue } from './appContext'
 import type { AppPage, ChildId } from './types'
 
-const storageKey = 'mindbridge.selectedChild'
+const storageKey = 'insighted.selectedChild'
+const legacyStorageKey = 'mindbridge.selectedChild'
 
 function getPageFromPathname(pathname: string): AppPage {
   switch (pathname) {
@@ -43,7 +44,7 @@ function App() {
       return 'james'
     }
 
-    const stored = window.localStorage.getItem(storageKey)
+    const stored = window.localStorage.getItem(storageKey) ?? window.localStorage.getItem(legacyStorageKey)
     if (stored && stored in children) {
       return stored as ChildId
     }
@@ -60,7 +61,8 @@ function App() {
 
   useEffect(() => {
     window.localStorage.setItem(storageKey, selectedChildId)
-    document.title = `MindBridge · ${children[selectedChildId].name}`
+    window.localStorage.removeItem(legacyStorageKey)
+    document.title = `InsightED · ${children[selectedChildId].name}`
   }, [selectedChildId])
 
   useEffect(() => {

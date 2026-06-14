@@ -30,7 +30,7 @@ export function Layout({ children }: LayoutProps) {
               🧠
             </div>
             <div>
-              <div className="font-display text-lg font-semibold tracking-tight text-[color:var(--ink)]">MindBridge</div>
+              <div className="font-display text-lg font-semibold tracking-tight text-[color:var(--ink)]">InsightED</div>
               <div className="text-[11px] uppercase tracking-[0.24em] text-[color:var(--ink-soft)]">
                 early learning intelligence
               </div>
