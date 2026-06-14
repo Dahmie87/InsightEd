@@ -26,11 +26,17 @@ export function Layout({ children }: LayoutProps) {
       <header className="sticky top-0 z-40 border-b border-[color:var(--border)] bg-[rgba(250,247,244,0.9)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <button type="button" onClick={() => context.navigate('overview')} className="flex items-center gap-3 text-left">
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-[color:var(--color-orange)] text-lg shadow-[var(--shadow)]">
-              🧠
+            <div className="relative grid h-11 w-11 place-items-center rounded-[1.15rem] bg-[linear-gradient(135deg,var(--color-orange)_0%,#ffb15e_100%)] shadow-[var(--shadow)]">
+              <span className="absolute left-2 top-2 h-2.5 w-2.5 rounded-full bg-white/90" aria-hidden="true" />
+              <span className="absolute right-2.5 top-3 h-1.5 w-1.5 rounded-full bg-white/80" aria-hidden="true" />
+              <span className="absolute bottom-2 left-1/2 h-4 w-1.5 -translate-x-1/2 rounded-full bg-white/95" aria-hidden="true" />
+              <span className="absolute bottom-3 left-1/2 h-1.5 w-4 -translate-x-1/2 rounded-full bg-white/95" aria-hidden="true" />
+              <span className="absolute inset-x-2 bottom-1 h-2 rounded-full bg-[rgba(255,255,255,0.32)]" aria-hidden="true" />
             </div>
             <div>
-              <div className="font-display text-lg font-semibold tracking-tight text-[color:var(--ink)]">InsightED</div>
+              <div className="font-display text-lg font-semibold tracking-tight text-[color:var(--ink)]">
+                Insight<span className="rounded-full bg-[color:var(--orange-bg)] px-1.5 py-0.5 text-[color:var(--color-orange)]">ED</span>
+              </div>
               <div className="text-[11px] uppercase tracking-[0.24em] text-[color:var(--ink-soft)]">
                 early learning intelligence
               </div>

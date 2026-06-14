@@ -158,16 +158,23 @@ export function DashboardPage() {
           </div>
         </article>
 
-        <article className="rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--ink)] p-5 text-white shadow-[var(--shadow)] sm:p-6">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/40">Recommended support</div>
-          <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">What the teacher should do next</h2>
+        <article className="rounded-[1.5rem] border border-[color:rgba(239,125,47,0.16)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(255,247,236,0.95)_100%)] p-5 shadow-[var(--shadow)] sm:p-6">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--color-orange)]">Recommended support</div>
+              <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-[color:var(--ink)] sm:text-2xl">What the teacher should do next</h2>
+            </div>
+            <div className="rounded-full bg-[color:var(--orange-bg)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-orange)]">
+              Action plan
+            </div>
+          </div>
           <div className="mt-5 space-y-3">
             {child.recommendations.map((recommendation, index) => (
-              <div key={recommendation} className="flex gap-3 rounded-2xl bg-white/5 px-4 py-3">
-                <div className="grid h-7 w-7 place-items-center rounded-full bg-[color:var(--color-orange)] text-sm font-bold text-white">
+              <div key={recommendation} className="flex gap-3 rounded-2xl border border-[color:var(--border)] bg-white px-4 py-3">
+                <div className="grid h-7 w-7 place-items-center rounded-full bg-[color:var(--orange-bg)] text-sm font-bold text-[color:var(--color-orange)]">
                   {index + 1}
                 </div>
-                <p className="text-sm leading-6 text-white/75">{recommendation}</p>
+                <p className="text-sm leading-6 text-[color:var(--ink-mid)]">{recommendation}</p>
               </div>
             ))}
           </div>
