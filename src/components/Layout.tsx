@@ -34,7 +34,7 @@ export function Layout({ children }: LayoutProps) {
               <div className="font-display text-lg font-medium tracking-tight text-[color:var(--ink)]">
                 Insight<span className="rounded-full bg-[color:var(--orange-bg)] px-1.5 py-0.5 text-[color:var(--color-orange)]">ED</span>
               </div>
-              <div className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--ink-soft)] sm:text-[11px]">
+              <div className="mt-0.5 text-[9px] font-normal uppercase tracking-[0.16em] text-[color:var(--ink-soft)] sm:text-[10px]">
                 early learning intelligence
               </div>
             </div>

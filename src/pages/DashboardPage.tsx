@@ -13,19 +13,19 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6 lg:space-y-8">
-      <section className="rounded-[2rem] border border-[color:var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.94)_0%,rgba(255,247,234,0.96)_58%,rgba(255,244,226,0.92)_100%)] px-6 py-7 shadow-[var(--shadow)] sm:px-8 sm:py-9 lg:px-10 lg:py-10">
-        <div className="flex flex-col gap-10 lg:flex-row lg:flex-nowrap lg:items-stretch lg:gap-10">
-          <div className="w-full space-y-5 lg:w-[43%] lg:flex-none">
-           
-            <h1 className="max-w-[16ch] font-display text-3xl font-semibold leading-[1.04] tracking-tight text-[color:var(--ink)] sm:text-4xl lg:text-5xl">
-              Every child deserves to be <TypingHeroWord />,
-              {' '}
-              not labelled.
+      <section className="rounded-[2rem] border border-[color:var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.94)_0%,rgba(255,247,234,0.96)_58%,rgba(255,244,226,0.92)_100%)] px-7 py-9 shadow-[var(--shadow)] sm:px-10 sm:py-11 lg:px-12 lg:py-12">
+        <div className="flex flex-col gap-12 lg:flex-row lg:flex-nowrap lg:items-stretch lg:gap-12">
+          <div className="w-full space-y-6 lg:w-[45%] lg:flex-none">
+            <h1 className="max-w-[22ch] font-display text-3xl font-semibold leading-[1.08] tracking-tight text-[color:var(--ink)] sm:text-4xl lg:text-5xl">
+              <span className="block">
+                Every child deserves to be <TypingHeroWord />, 
+              </span>
+              <span className="block">not labelled.</span>
             </h1>
-            <p className="max-w-[34rem] text-sm leading-7 text-[color:var(--ink-mid)] sm:text-base">
+            <p className="max-w-[33rem] text-sm leading-7 text-[color:var(--ink-mid)] sm:text-base">
               InsightED watches how a child learns, then turns the patterns into gentle, useful guidance. The child sees games. The teacher sees next steps.
             </p>
-            <div className="flex flex-wrap gap-3 pt-1">
+            <div className="flex flex-wrap gap-3 pt-2">
               <button
                 type="button"
                 onClick={() => navigate('learn')}
@@ -246,8 +246,8 @@ function TypingHeroWord() {
   }, [displayText, isDeleting, wordIndex])
 
   return (
-    <span className="inline-flex w-[11ch] items-center gap-1 rounded-full bg-[color:var(--orange-bg)] px-3 py-1 text-[color:var(--color-orange)] shadow-sm">
-      <span className="inline-block w-[8.5ch] text-left">{displayText}</span>
+    <span className="inline-grid h-[1.35em] w-[12ch] shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-1 rounded-full bg-[color:var(--orange-bg)] px-3 text-[color:var(--color-orange)] shadow-sm align-middle leading-none">
+      <span className="block overflow-hidden whitespace-nowrap text-left tabular-nums">{displayText}</span>
       <span className="-mt-0.5 inline-block animate-pulse text-[0.95em] leading-none">|</span>
     </span>
   )
