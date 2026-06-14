@@ -1,7 +1,10 @@
+import { useEffect, useState } from 'react'
 import { Gauge } from '../components/Gauge'
 import { useAppContext } from '../appContext'
 import { childOrder } from '../data'
 import type { ChildId } from '../types'
+
+const heroWords = ['understood', 'seen', 'supported', 'guided']
 
 export function DashboardPage() {
   const { children, selectedChild, selectedChildId, setSelectedChildId, navigate } = useAppContext()
@@ -16,7 +19,9 @@ export function DashboardPage() {
               AI-powered early detection · Africa
             </div>
             <h1 className="font-display text-3xl font-semibold tracking-tight text-[color:var(--ink)] sm:text-4xl lg:text-5xl">
-              Every child deserves to be <span className="text-[color:var(--color-orange)]">understood</span>, not labelled.
+              Every child deserves to be <TypingHeroWord />,
+              {' '}
+              not labelled.
             </h1>
             <p className="max-w-2xl text-sm leading-7 text-[color:var(--ink-mid)] sm:text-base">
               InsightED watches how a child learns, then turns the patterns into gentle, useful guidance. The child sees games. The teacher sees next steps.
@@ -197,6 +202,47 @@ function StatPill({ label, value, note }: { label: string; value: string; note: 
       <div className="mt-2 text-3xl font-bold tracking-tight text-[color:var(--ink)]">{value}</div>
       <p className="mt-2 text-sm leading-6 text-[color:var(--ink-soft)]">{note}</p>
     </div>
+  )
+}
+
+function TypingHeroWord() {
+  const [wordIndex, setWordIndex] = useState(0)
+  const [displayText, setDisplayText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    const activeWord = heroWords[wordIndex]
+    const typingDelay = isDeleting ? 55 : 95
+    const pauseDelay = activeWord === displayText ? 1100 : 180
+
+    const timer = window.setTimeout(() => {
+      if (!isDeleting) {
+        if (displayText.length < activeWord.length) {
+          setDisplayText(activeWord.slice(0, displayText.length + 1))
+          return
+        }
+
+        setIsDeleting(true)
+        return
+      }
+
+      if (displayText.length > 0) {
+        setDisplayText(activeWord.slice(0, displayText.length - 1))
+        return
+      }
+
+      setIsDeleting(false)
+      setWordIndex((value) => (value + 1) % heroWords.length)
+    }, activeWord === displayText ? pauseDelay : typingDelay)
+
+    return () => window.clearTimeout(timer)
+  }, [displayText, isDeleting, wordIndex])
+
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--orange-bg)] px-3 py-1 text-[color:var(--color-orange)] shadow-sm">
+      <span className="min-w-[6ch] text-left">{displayText}</span>
+      <span className="-mt-0.5 inline-block animate-pulse text-[0.95em] leading-none">|</span>
+    </span>
   )
 }
 
