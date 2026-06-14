@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+@import "tailwindcss";
+
+@theme {
+	--font-sans: 'DM Sans', sans-serif;
+	--font-display: 'Playfair Display', serif;
+}
+
+:root {
+	--bg: #faf7f4;
+	--surface: #f3ede5;
+	--surface2: #ede4d8;
+	--surface-card: #ffffff;
+	--border: rgba(28, 20, 14, 0.1);
+	--color-orange: #d97235;
+	--color-orange-lt: #f0a872;
+	--orange-bg: #fdf3eb;
+	--ink: #1c1917;
+	--ink-mid: #57483c;
+	--ink-soft: #9c8878;
+	--color-green: #4d9b6f;
+	--color-amber: #c9841a;
+	--color-red: #c94e35;
+	--shadow: 0 1px 3px rgba(28, 20, 14, 0.06), 0 4px 16px rgba(28, 20, 14, 0.08);
+	--shadow-strong: 0 16px 48px rgba(28, 20, 14, 0.16);
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: 'DM Sans', sans-serif;
+	background:
+		radial-gradient(circle at top left, rgba(217, 114, 53, 0.08) 0%, transparent 30%),
+		linear-gradient(180deg, var(--bg) 0%, #fcfaf7 100%);
+	color: var(--ink);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#root {
+	min-height: 100vh;
+}
+
+::selection {
+	background: rgba(217, 114, 53, 0.18);
+	color: var(--ink);
+}
