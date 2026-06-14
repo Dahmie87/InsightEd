@@ -1,28 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
 	--font-sans: 'DM Sans', sans-serif;
-	--font-display: 'Playfair Display', serif;
+	--font-display: 'Nunito', 'DM Sans', sans-serif;
 }
 
 :root {
-	--bg: #faf7f4;
-	--surface: #f3ede5;
-	--surface2: #ede4d8;
+	--bg: #fff9f1;
+	--surface: #fff1df;
+	--surface2: #f9e3c4;
 	--surface-card: #ffffff;
-	--border: rgba(28, 20, 14, 0.1);
-	--color-orange: #d97235;
-	--color-orange-lt: #f0a872;
-	--orange-bg: #fdf3eb;
-	--ink: #1c1917;
-	--ink-mid: #57483c;
-	--ink-soft: #9c8878;
-	--color-green: #4d9b6f;
-	--color-amber: #c9841a;
-	--color-red: #c94e35;
-	--shadow: 0 1px 3px rgba(28, 20, 14, 0.06), 0 4px 16px rgba(28, 20, 14, 0.08);
-	--shadow-strong: 0 16px 48px rgba(28, 20, 14, 0.16);
+	--border: rgba(109, 81, 44, 0.12);
+	--color-orange: #ef7d2f;
+	--color-orange-lt: #ffb16b;
+	--orange-bg: #fff0df;
+	--ink: #1f2430;
+	--ink-mid: #5f6573;
+	--ink-soft: #8c93a3;
+	--color-green: #39a46a;
+	--color-amber: #d89a1f;
+	--color-red: #df5b4f;
+	--shadow: 0 8px 24px rgba(77, 57, 29, 0.08), 0 2px 6px rgba(77, 57, 29, 0.05);
+	--shadow-strong: 0 20px 60px rgba(77, 57, 29, 0.14);
 }
 
 html {
@@ -35,8 +35,9 @@ body {
 	min-height: 100vh;
 	font-family: 'DM Sans', sans-serif;
 	background:
-		radial-gradient(circle at top left, rgba(217, 114, 53, 0.08) 0%, transparent 30%),
-		linear-gradient(180deg, var(--bg) 0%, #fcfaf7 100%);
+		radial-gradient(circle at top left, rgba(239, 125, 47, 0.16) 0%, transparent 26%),
+		radial-gradient(circle at top right, rgba(57, 164, 106, 0.09) 0%, transparent 22%),
+		linear-gradient(180deg, var(--bg) 0%, #fff6ea 100%);
 	color: var(--ink);
 }
 
@@ -49,6 +50,6 @@ body {
 }
 
 ::selection {
-	background: rgba(217, 114, 53, 0.18);
+	background: rgba(239, 125, 47, 0.22);
 	color: var(--ink);
 }
