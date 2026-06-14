@@ -27,14 +27,14 @@ export function Layout({ children }: LayoutProps) {
       <header className="sticky top-0 z-40 border-b border-[color:var(--border)] bg-[rgba(250,247,244,0.9)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <button type="button" onClick={() => context.navigate('overview')} className="flex items-center gap-3 text-left">
-            <div className="grid h-11 w-11 place-items-center rounded-[1.15rem] bg-[linear-gradient(135deg,var(--color-orange)_0%,#ffb15e_100%)] shadow-[var(--shadow)]">
+            <div className="grid h-11 w-11 place-items-center rounded-[1.15rem] bg-[color:var(--color-orange)] shadow-[var(--shadow)] ring-1 ring-white/70">
               <Brain className="h-6 w-6 text-white" strokeWidth={2.2} aria-hidden="true" />
             </div>
             <div>
               <div className="font-display text-lg font-medium tracking-tight text-[color:var(--ink)]">
                 Insight<span className="rounded-full bg-[color:var(--orange-bg)] px-1.5 py-0.5 text-[color:var(--color-orange)]">ED</span>
               </div>
-              <div className="text-[11px] uppercase tracking-[0.24em] text-[color:var(--ink-soft)]">
+              <div className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[color:var(--ink-soft)] sm:text-[11px]">
                 early learning intelligence
               </div>
             </div>

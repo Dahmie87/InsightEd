@@ -13,9 +13,9 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6 lg:space-y-8">
-      <section className="rounded-[2rem] border border-[color:var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.94)_0%,rgba(255,247,234,0.96)_58%,rgba(255,244,226,0.92)_100%)] p-5 shadow-[var(--shadow)] sm:p-7 lg:p-8">
-        <div className="flex flex-col gap-8 lg:flex-row lg:flex-nowrap lg:items-stretch lg:gap-6">
-          <div className="w-full space-y-4 lg:w-[42%] lg:flex-none">
+      <section className="rounded-[2rem] border border-[color:var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.94)_0%,rgba(255,247,234,0.96)_58%,rgba(255,244,226,0.92)_100%)] px-6 py-7 shadow-[var(--shadow)] sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+        <div className="flex flex-col gap-10 lg:flex-row lg:flex-nowrap lg:items-stretch lg:gap-10">
+          <div className="w-full space-y-5 lg:w-[43%] lg:flex-none">
            
             <h1 className="max-w-[16ch] font-display text-3xl font-semibold leading-[1.04] tracking-tight text-[color:var(--ink)] sm:text-4xl lg:text-5xl">
               Every child deserves to be <TypingHeroWord />,
@@ -43,8 +43,8 @@ export function DashboardPage() {
             </div>
           </div>
 
-          <div className="relative min-h-[13rem] overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(255,242,223,0.96)_100%)] shadow-[var(--shadow)] lg:min-h-[20rem] lg:flex-1 lg:min-w-0">
-            <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,transparent_100%)]" />
+          <div className="relative min-h-[11rem] overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(255,242,223,0.96)_100%)] shadow-[var(--shadow)] lg:min-h-[18rem] lg:flex-1 lg:min-w-0">
+            <div className="absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,transparent_100%)]" />
             <img
               src={heroImage}
               alt="InsightED hero illustration"

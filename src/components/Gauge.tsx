@@ -38,8 +38,12 @@ export function Gauge({ value, color, title, subtitle, description }: GaugeProps
             />
           </svg>
           <div className="absolute inset-x-0 bottom-0 text-center">
-            <div className="text-4xl font-bold tracking-tight text-[color:var(--ink)] md:text-5xl">{safeValue}%</div>
-            <div className="mt-2 text-xs uppercase tracking-[0.2em] text-[color:var(--ink-soft)]">confidence</div>
+            <div className="text-3xl font-extrabold leading-none tracking-tight tabular-nums text-[color:var(--ink)] md:text-4xl">
+              {safeValue}%
+            </div>
+            <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--ink-soft)]">
+              confidence
+            </div>
           </div>
         </div>
 
